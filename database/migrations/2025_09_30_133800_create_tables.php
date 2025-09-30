@@ -55,11 +55,11 @@ return new class extends Migration
     {
         Schema::table('users', function(Blueprint $table){
             $table->dropColumn('phone');
-            $table->dropColimn('is_organization');
+            $table->dropColumn('is_organization');
         });
+        Schema::dropIfExists('item_orders');
         Schema::dropIfExists('orders');
         Schema::dropIfExists('items');
         Schema::dropIfExists('categories');
-        Schema::dropIfExists('item_orders');
     }
 };
