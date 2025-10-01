@@ -26,7 +26,7 @@ return new class extends Migration
             $table->unsignedInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categories');
             $table->string('name', 256);
-            $table->unsignedBigInteger('price');
+            $table->integer('price');
             $table->integer('balance');
         });
 
