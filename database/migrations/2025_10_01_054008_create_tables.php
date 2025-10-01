@@ -37,6 +37,7 @@ return new class extends Migration
             $table->dateTime('time_start');
             $table->dateTime('time_end');
             $table->integer('total_price');
+            $table->boolean('need_delivery');
         });
 
         Schema::create('item_orders', function (Blueprint $table) {
