@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('phone');
+            $table->BigInteger('phone');
             $table->boolean('is_organization');
         });
 
@@ -37,7 +37,6 @@ return new class extends Migration
             $table->dateTime('time_start');
             $table->dateTime('time_end');
             $table->integer('total_price');
-            $table->boolean('need_delivery');
         });
 
         Schema::create('item_orders', function (Blueprint $table) {
@@ -46,6 +45,7 @@ return new class extends Migration
             $table->foreign('item_id')->references('id')->on('items');
             $table->unsignedInteger('order_id');
             $table->foreign('order_id')->references('id')->on('orders');
+            $table->integer('amount');
         });
     }
 
