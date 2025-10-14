@@ -10,16 +10,22 @@
 <form method="post" action={{url('item/update/'.$item->id)}}/>
     @csrf
     <label>Наименование</label>
-    <input type="text" name="name" value="@if (old('name')) {{old('name')}} @else {{$item->name}}
-    @endif
-    " />
+    <input type="text" name="name" value="@if (old('name')) {{old('name')}} @else {{$item->name}} @endif"/>
     @error('name')
     <div class="is-invalid">{{ $message }}</div>
     @enderror
 <br>
     <label>Цена</label>
-    <input type="text" name="price" value="@if (old('name')) {{old('price')}} @else {{$item->price}} @endif "/>
+    <input type="text" name="price" value="@if (old('name')) {{old('price')}} @else {{$item->price}} @endif"/>
     @error('price')
+    <div class="is-invalid">{{ $message }}</div>
+    @enderror
+<br>
+<form method="post" action={{url('item/update/'.$item->id)}}/>
+    @csrf
+    <label>Количество</label>
+    <input type="text" name="balance" value="@if (old('name')) {{old('balance')}} @else {{$item->balance}} @endif"/>
+    @error('balance')
     <div class="is-invalid">{{ $message }}</div>
     @enderror
 <br>
