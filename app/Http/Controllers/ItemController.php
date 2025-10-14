@@ -91,6 +91,6 @@ class ItemController extends Controller
     public function destroy(string $id)
     {
         Item::destroy($id);
-        return redirect('item');
+        return redirect('/item');
     }
 }
