@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Item;
+use App\Models\Category;
 
 class ItemController extends Controller
 {
@@ -32,7 +33,9 @@ class ItemController extends Controller
      */
     public function create()
     {
-        //
+        return view('item_create', [
+            'categories' => Category::all()
+        ]);
     }
 
     /**
@@ -40,7 +43,15 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required| unique:items| max:255',
+            'price' => 'required|integer',
+            'category_id' => 'integer',
+            'balance' => 'integer'
+        ]);
+        $item= new Item($validated);
+        $item->save();
+        return redirect( to: '/item');
     }
 
     /**
@@ -48,7 +59,10 @@ class ItemController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('item_edit', [
+            'item' => Item::all()->where('id', $id)->first(),
+            'categories' => Category::all()
+        ]);
     }
 
     /**
@@ -56,7 +70,17 @@ class ItemController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|max: 255',
+            'price' => 'required|integer',
+            'category_id' => 'integer'
+        ]);
+        $item = Item::all()->where('id', $id)->first();
+        $item->name = $validated['name'];
+        $item->price = $validated['price'];
+        $item->category_id = $validated['category_id'];
+        $item->save();
+        return redirect('/item');
     }
 
     /**
@@ -64,6 +88,7 @@ class ItemController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Item::destroy($id);
+        return redirect('item');
     }
 }

@@ -8,7 +8,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Item extends Model
 {
+    public $timestamps = false;
     use HasFactory;
+    protected $fillable = [
+        'name',
+        'price',
+        'category_id',
+        'balance'
+    ];
     public function category(): BelongsTo{
         return $this->belongsTo(Category::class);
     }
