@@ -46,8 +46,8 @@ class ItemController extends Controller
         $validated = $request->validate([
             'name' => 'required| unique:items| max:255',
             'price' => 'required|integer',
-            'category_id' => 'integer',
-            'balance' => 'integer'
+            'category_id' => 'required|integer',
+            'balance' => 'required|integer'
         ]);
         $item= new Item($validated);
         $item->save();
@@ -73,8 +73,8 @@ class ItemController extends Controller
         $validated = $request->validate([
             'name' => 'required|max: 255',
             'price' => 'required|integer',
-            'category_id' => 'integer',
-            'balance' => 'integer'
+            'category_id' => 'required|integer',
+            'balance' => 'required|integer'
         ]);
         $item = Item::all()->where('id', $id)->first();
         $item->name = $validated['name'];

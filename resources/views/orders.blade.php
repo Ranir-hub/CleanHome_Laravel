@@ -24,5 +24,6 @@
         </tr>
     @endforeach
     </table>
+    {{ $orders->links() }}
 </body>
 </html>

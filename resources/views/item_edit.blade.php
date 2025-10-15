@@ -16,7 +16,7 @@
     @enderror
 <br>
     <label>Цена</label>
-    <input type="text" name="price" value="@if (old('name')) {{old('price')}} @else {{$item->price}} @endif"/>
+    <input type="text" name="price" value="@if (old('price')) {{old('price')}} @else {{$item->price}} @endif"/>
     @error('price')
     <div class="is-invalid">{{ $message }}</div>
     @enderror
@@ -24,7 +24,7 @@
 <form method="post" action={{url('item/update/'.$item->id)}}/>
     @csrf
     <label>Количество</label>
-    <input type="text" name="balance" value="@if (old('name')) {{old('balance')}} @else {{$item->balance}} @endif"/>
+    <input type="text" name="balance" value="@if (old('balance')) {{old('balance')}} @else {{$item->balance}} @endif"/>
     @error('balance')
     <div class="is-invalid">{{ $message }}</div>
     @enderror

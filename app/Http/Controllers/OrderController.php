@@ -10,10 +10,18 @@ class OrderController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
+    
+    // public function index()
+    // {
+    //     return view('orders', [
+    //         'orders' =>  Order::all()
+    //     ]);
+    // }
+
+    public function index(Request $request){
+        $perpage = $request->perpage ?? 5;
         return view('orders', [
-            'orders' =>  Order::all()
+            'orders' => Order::paginate($perpage)->withQueryString()
         ]);
     }
 
