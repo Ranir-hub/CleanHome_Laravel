@@ -1,6 +1,17 @@
 @if ($paginator->hasPages())
     <nav>
         <ul class="pagination">
+            {{-- First Page Link --}}
+            @if ($paginator->onFirstPage())
+                <li class="disabled" aria-disabled="true" aria-label="@lang('pagination.previous')">
+                    <span aria-hidden="true">&lsaquo;</span>
+                </li>
+            @else
+                <li>
+                    <a href="{{ $paginator->url(1) }}" rel="prev" aria-label="@lang('pagination.previous')">&lsaquo;</a>
+                </li>
+            @endif
+
             {{-- Previous Page Link --}}
             @if ($paginator->onFirstPage())
                 <li class="disabled" aria-disabled="true" aria-label="@lang('pagination.previous')">
@@ -41,6 +52,18 @@
                     <span aria-hidden="true">&rsaquo;</span>
                 </li>
             @endif
+            
+            {{-- Last Page Link --}}
+            @if ($paginator->onLastPage())
+                <li class="disabled" aria-disabled="true" aria-label="@lang('pagination.next')">
+                    <span aria-hidden="true">&lsaquo;</span>
+                </li>
+            @else
+                <li>
+                    <a href="{{ $paginator->url($paginator->lastPage()) }}" rel="next" aria-label="@lang('pagination.next')">&rsaquo;</a>
+                </li>
+            @endif
+
         </ul>
     </nav>
     Элементов на странице:

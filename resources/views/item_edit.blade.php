@@ -42,7 +42,7 @@
         @endforeach
     </select>
     @error('category_id')
-    <div class="is-invalid">{{ $message }}}</div>
+    <div class="is-invalid">{{ $message }}</div>
     @enderror
 <br>
     <input type="submit">
