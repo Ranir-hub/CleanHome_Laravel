@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Item;
 use App\Models\Category;
+use Illuminate\Support\Facades\Gate;
 
 class ItemController extends Controller
 {
@@ -33,6 +34,9 @@ class ItemController extends Controller
      */
     public function create()
     {
+        if(! Gate::allows('create-item')){
+            return redirect('/error')->with('message', 'У вас нет разрешения на создание');
+        }
         return view('item_create', [
             'categories' => Category::all()
         ]);
@@ -59,6 +63,9 @@ class ItemController extends Controller
      */
     public function edit(string $id)
     {
+        if(! Gate::allows('destroy-edit-item', Item::all()->where('id', $id)->first())){
+            return redirect('/error')->with('message', 'У вас нет разрешения на редактирование товара '.$id);
+        }
         return view('item_edit', [
             'item' => Item::all()->where('id', $id)->first(),
             'categories' => Category::all()
@@ -90,6 +97,9 @@ class ItemController extends Controller
      */
     public function destroy(string $id)
     {
+        if(! Gate::allows('destroy-edit-item', Item::all()->where('id', $id)->first())){
+            return redirect('/error')->with('message', 'У вас нет разрешения на удаление товара '.$id);
+        }
         Item::destroy($id);
         return redirect('/item');
     }

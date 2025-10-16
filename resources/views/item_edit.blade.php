@@ -30,7 +30,7 @@
     @enderror
 <br>
     <label>Категория:</label>
-    <select name="category_id" value="{{ old('category_id') }}-">
+    <select name="category_id" value="{{ old('category_id') }}">
         <option style="...">
         @foreach ($categories as $category)
             <option value="{{$category->id}}"

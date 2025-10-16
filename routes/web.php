@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\LoginController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -21,8 +22,14 @@ Route::get('/order', [OrderController::class, 'index']);
 Route::get('/order/{id}', [OrderController::class, 'show']);
 Route::get('/user', [UserController::class, 'index']);
 Route::get('/user/{id}', [UserController::class, 'show']);
-Route::get('/item/create', [ItemController::class, 'create']);
 Route::post('/item', [ItemController::class, 'store']);
-Route::get('/item/edit/{id}', [ItemController::class, 'edit']);
-Route::post('/item/update/{id}', [ItemController::class, 'update']);
-Route::get('/item/destroy/{id}', [ItemController::class, 'destroy']);
+Route::get('/item/create', [ItemController::class, 'create'])->middleware('auth');
+Route::get('/item/edit/{id}', [ItemController::class, 'edit'])->middleware('auth');
+Route::post('/item/update/{id}', [ItemController::class, 'update'])->middleware('auth');
+Route::get('/item/destroy/{id}', [ItemController::class, 'destroy'])->middleware('auth');
+Route::get('/login', [LoginController::class, 'login'])->name('login');
+Route::get('/logout', [LoginController::class, 'logout']);
+Route::post('/auth', [LoginController::class, 'authenticate']);
+Route::get('/error', function() {
+    return view('error', ['message' => session('message')]);
+});
