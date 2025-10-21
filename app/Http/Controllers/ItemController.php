@@ -34,8 +34,10 @@ class ItemController extends Controller
      */
     public function create()
     {
-        if(! Gate::allows('create-item')){
-            return redirect('/error')->with('message', 'У вас нет разрешения на создание');
+        if(!Gate::allows('create-item')){
+            return redirect()->back()->withErrors([
+                'error' => 'У вас нет прав на создание'
+            ]);
         }
         return view('item_create', [
             'categories' => Category::all()
@@ -55,7 +57,9 @@ class ItemController extends Controller
         ]);
         $item= new Item($validated);
         $item->save();
-        return redirect( to: '/item');
+        return redirect('/item')->withErrors([
+            'success' => 'Товар был успешно добавлен'
+        ]);
     }
 
     /**
@@ -64,7 +68,9 @@ class ItemController extends Controller
     public function edit(string $id)
     {
         if(! Gate::allows('destroy-edit-item', Item::all()->where('id', $id)->first())){
-            return redirect('/error')->with('message', 'У вас нет разрешения на редактирование товара '.$id);
+            return redirect()->back()->withErrors([
+                'error' => 'У вас нет прав на редактирование'
+            ]);
         }
         return view('item_edit', [
             'item' => Item::all()->where('id', $id)->first(),
@@ -89,7 +95,9 @@ class ItemController extends Controller
         $item->category_id = $validated['category_id'];
         $item->balance = $validated['balance'];
         $item->save();
-        return redirect('/item');
+        return redirect('/item')->withErrors([
+                'success' => 'Товар был успешно изменён'
+        ]);
     }
 
     /**
@@ -98,9 +106,13 @@ class ItemController extends Controller
     public function destroy(string $id)
     {
         if(! Gate::allows('destroy-edit-item', Item::all()->where('id', $id)->first())){
-            return redirect('/error')->with('message', 'У вас нет разрешения на удаление товара '.$id);
+            return redirect()->back()->withErrors([
+                'error' => 'У вас нет разрешения на удаление'
+            ]);
         }
         Item::destroy($id);
-        return redirect('/item');
+        return redirect('/item')->withErrors([
+                'success' => 'Товар был успешно удалён'
+        ]);
     }
 }

@@ -1,29 +1,35 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title> 609-31 </title>
-</head>
-<body>
-    <h2>Список заказов</h2>
-    <table border="1">
-        <thead>
-            <td>id</td>
-            <td>id пользователя</td>
-            <td>Время начала</td>
-            <td>Время конца</td>
-            <td>Итоговая стоимость</td>
+@extends('layouts.layout')
+@section('content')
+<h2 class="mb-4">Список заказов</h2>
+<div class="table-responsive">
+    <table class="table table-striped table-bordered">
+        <thead class="table-light">
+            <tr>
+                <th scope="col" class="text-center">ID</th>
+                <th scope="col" class="text-center">ID пользователя</th>
+                <th scope="col" class="text-center">Время начала</th>
+                <th scope="col" class="text-center">Время конца</th>
+                <th scope="col" class="text-center">Итоговая стоимость</th>
+            </tr>
         </thead>
-    @foreach ($orders as $order)
-        <tr>
-            <td>{{$order->id}}</td>
-            <td>{{$order->user_id}}</td>
-            <td>{{$order->time_start}}</td>
-            <td>{{$order->time_end}}</td>
-            <td>{{$order->total_price}}</td>
-        </tr>
-    @endforeach
+        <tbody>
+            @foreach ($orders as $order)
+                <tr>
+                    <td class="text-center fw-bold">{{$order->id}}</td>
+                    <td class="text-center">{{$order->user_id}}</td>
+                    <td class="text-center">{{$order->time_start}}</td>
+                    <td class="text-center">{{$order->time_end}}</td>
+                    <td class="text-center fw-bold text-success">{{$order->total_price}}</td>
+                </tr>
+            @endforeach
+        </tbody>
     </table>
-    {{ $orders->links() }}
-</body>
-</html>
+</div>
+<div class="d-flex align-items-center mt-3">
+    <nav aria-label="Page navigation">
+        <ul class="pagination mb-0">
+            {{ $orders->links() }}
+        </ul>
+    </nav>
+</div>
+@endsection

@@ -1,33 +1,34 @@
-<! doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title> 609-31 </title>
-</head>
-<body>
-    <h2>Список товаров</h2>
-    <table border="1">
-        <thead>
-            <td>id</td>
-            <td>Наименование</td>
-            <td>Цена</td>
-            <td>В наличии</td>
-            <td>Категория</td>
-            <td>Действия</td>
+@extends('layouts.layout')
+@section('content')
+<h2 >Список товаров</h2>
+<a href="{{ url('item/create') }}" class="btn btn-primary mb-2">Создать товар</a>
+<div class="table-responsive">
+    <table class="table table-striped table-bordered">
+        <thead class="table-light">
+            <tr>
+                <th scope="col" class="text-center">ID</th>
+                <th scope="col">Наименование</th>
+                <th scope="col" class="text-center">Цена</th>
+                <th scope="col" class="text-center">В наличии</th>
+                <th scope="col">Категория</th>
+                <th scope="col" class="text-center">Действия</th>
+            </tr>
         </thead>
-    @foreach ($items->sortBy('id') as $item)
-        <tr>
-            <td>{{$item->id}}</td>
-            <td>{{$item->name}}</td>
-            <td>{{$item->price}}</td>
-            <td>{{$item->balance}}</td>
-            <td>{{$item->category->name}}</td>
-            <td><a href="{{url('item/destroy/'.$item->id)}}">Удалить</a>
-                <a href="{{url('item/edit/'.$item->id)}}">Редактировать</a>
-            </td>
-        </tr>
-    @endforeach
+        <tbody>
+            @foreach ($items->sortBy('id') as $item)
+                <tr>
+                    <td class="text-center fw-bold">{{$item->id}}</td>
+                    <td>{{$item->name}}</td>
+                    <td class="text-center">{{$item->price}}</td>
+                    <td class="text-center">{{$item->balance}}</td>
+                    <td>{{$item->category->name}}</td>
+                    <td class="text-center">
+                        <a href="{{url('item/edit/'.$item->id)}}" class="btn btn-sm btn-outline-primary me-2">Редактировать</a>
+                        <a href="{{url('item/destroy/'.$item->id)}}" class="btn btn-sm btn-outline-danger">Удалить</a>
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
     </table>
-    <a href="{{url('item/create')}}">Создать</a>
-</body>
-</html>
+</div>
+@endsection

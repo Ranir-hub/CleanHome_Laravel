@@ -1,32 +1,34 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title> 609-31 </title>
-</head>
-<body>
-    <h2>Список пользователей:</h2>
-    <table border="1">
-    <thead>
-        <td>id</td>
-        <td>Имя</td>
-        <td>Телефон</td>
-        <td>Почта</td>
-        <td>Организация</td>
-    </thead>
-    @foreach ($users as $user)
-        <tr>
-            <td>{{$user->id}}</td>
-            <td>{{$user->name}}</td>
-            <td>{{"+".$user->phone}}</td>
-            <td>{{$user->email}}</td>
-            @if($user->is_organization)
-                <td>Да</td>
-            @else
-                <td>Нет</td>
-            @endif
-        </tr>
-    @endforeach
+@extends('layouts.layout')
+@section('content')
+<h2 class="mb-4">Список пользователей:</h2>
+<div class="table-responsive">
+    <table class="table table-striped table-bordered">
+        <thead class="table-light">
+            <tr>
+                <th scope="col" class="text-center">ID</th>
+                <th scope="col">Имя</th>
+                <th scope="col">Телефон</th>
+                <th scope="col">Почта</th>
+                <th scope="col" class="text-center">Организация</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($users as $user)
+                <tr>
+                    <td class="text-center fw-bold">{{$user->id}}</td>
+                    <td>{{$user->name}}</td>
+                    <td>{{"+".$user->phone}}</td>
+                    <td>{{$user->email}}</td>
+                    <td class="text-center">
+                        @if($user->is_organization)
+                            <span class="badge bg-success">Да</span>
+                        @else
+                            <span class="badge bg-secondary">Нет</span>
+                        @endif
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
     </table>
-</body>
-</html>
+</div>
+@endsection

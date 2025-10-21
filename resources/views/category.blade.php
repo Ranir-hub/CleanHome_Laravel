@@ -1,28 +1,28 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title> 609-31 </title>
-</head>
-<body>
-    <h2>{{$category ? "Список товаров категории ".$category->name : "Неверный ID категории"}}</h2>
-    @if($category)
-    <table border="1">
-        <thead>
-            <td>id</td>
-            <td>Наименование</td>
-            <td>Цена</td>
-            <td>В наличии</td>
-        </thead>
-        @foreach ($category->items as $item)
+@extends('layouts.layout')
+@section('content')
+<h2 class="mb-4">{{$category ? "Список товаров категории ".$category->name : "Неверный ID категории"}}</h2>
+@if($category)
+<div class="table-responsive">
+    <table class="table table-striped table-bordered">
+        <thead class="table-light">
             <tr>
-                <td>{{$item->id}}</td>
-                <td>{{$item->name}}</td>
-                <td>{{$item->price}}</td>
-                <td>{{$item->balance}}</td>
+                <th scope="col" class="text-center">ID</th>
+                <th scope="col">Наименование</th>
+                <th scope="col" class="text-center">Цена</th>
+                <th scope="col" class="text-center">В наличии</th>
             </tr>
-        @endforeach
+        </thead>
+        <tbody>
+            @foreach ($category->items as $item)
+                <tr>
+                    <td class="text-center fw-bold">{{$item->id}}</td>
+                    <td>{{$item->name}}</td>
+                    <td class="text-center">{{$item->price}}</td>
+                    <td class="text-center">{{$item->balance}}</td>
+                </tr>
+            @endforeach
+        </tbody>
     </table>
-    @endif
-</body>
-</html>
+</div>
+@endif
+@endsection
