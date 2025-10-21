@@ -46,7 +46,7 @@
                             aria-label="Телефон" value="{{ old('phone') }}"/>
                         <input class="form-control me-2" type="password" placeholder="Пароль" name="password" 
                             aria-label="Пароль"/>
-                        <button class="btn btn-outline-success" type="submit">Войти</button>
+                        <button class="btn btn-outline-light" type="submit">Войти</button>
                     </form>
                     @else
                     <ul class="navbar-nav">
