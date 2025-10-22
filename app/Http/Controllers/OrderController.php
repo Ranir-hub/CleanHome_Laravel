@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Order;
+use Illuminate\Support\Facades\Gate;
 
 class OrderController extends Controller
 {
@@ -19,6 +20,11 @@ class OrderController extends Controller
     // }
 
     public function index(Request $request){
+        if(!Gate::allows('create-item')){
+            return redirect()->back()->withErrors([
+                'error' => 'У вас нет доступа к данному ресурсу'
+            ]);
+        }
         $perpage = $request->perpage ?? 5;
         return view('orders', [
             'orders' => Order::paginate($perpage)->withQueryString()
@@ -46,6 +52,11 @@ class OrderController extends Controller
      */
     public function show(string $id)
     {
+        if(!Gate::allows('create-item')){
+            return redirect()->back()->withErrors([
+                'error' => 'У вас нет доступа к данному ресурсу'
+            ]);
+        }
         return view('order', [
             'order' => Order::all()->where('id', $id)->first()
         ]);

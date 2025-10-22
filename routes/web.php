@@ -18,8 +18,8 @@ Route::get('/hello', function(){
 Route::get('/category', [CategoryController::class, 'index']);
 Route::get('/category/{id}', [CategoryController::class, 'show']);
 Route::get('/item', [ItemController::class, 'index']);
-Route::get('/order', [OrderController::class, 'index']);
-Route::get('/order/{id}', [OrderController::class, 'show']);
+Route::get('/order', [OrderController::class, 'index'])->middleware('auth');
+Route::get('/order/{id}', [OrderController::class, 'show'])->middleware('auth');
 Route::get('/user', [UserController::class, 'index']);
 Route::get('/user/{id}', [UserController::class, 'show']);
 Route::post('/item', [ItemController::class, 'store']);
