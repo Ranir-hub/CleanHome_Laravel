@@ -8,10 +8,10 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('');
 });
 
-Route::get('/hello', function(){
+Route::get('/', function(){
     return view('hello', ['title' => 'Hello world']);
 });
 

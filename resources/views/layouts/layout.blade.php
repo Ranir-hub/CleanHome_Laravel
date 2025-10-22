@@ -34,7 +34,7 @@
                         <a class="nav-link" href="{{ url('order') }}">Заказы</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('user') }}">Покупатели</a>
+                        <a class="nav-link" href="{{ url('user') }}">Пользователи</a>
                     </li>
                 </ul>
 

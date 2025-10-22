@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>609-31</title>
-    </head>
-    <body>
+@extends('layouts.layout')
+@section('content')
         <h2>{{ $title }}</h2>
-    </body>
-</html>
+@endsection
