@@ -1,9 +1,9 @@
 <?php
 
-use app\Http\Controllers\OrderControllerApi;
-use app\Http\Controllers\LoginController;
-use app\Http\Controllers\ItemControllerApi;
-use app\Http\Controllers\CategoryControllerApi;
+use App\Http\Controllers\OrderControllerApi;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ItemControllerApi;
+use App\Http\Controllers\CategoryControllerApi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
