@@ -12,7 +12,7 @@ class OrderControllerApi extends Controller
      */
     public function index()
     {
-        return response(Order::all());
+        return response(Order::with('items')->get());
     }
 
     /**
@@ -28,7 +28,7 @@ class OrderControllerApi extends Controller
      */
     public function show(string $id)
     {
-        return response(Order::find($id));
+        return response(Order::with('items')->find($id));
     }
 
     /**
