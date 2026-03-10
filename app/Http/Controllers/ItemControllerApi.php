@@ -12,9 +12,14 @@ class ItemControllerApi extends Controller
      */
     public function index()
     {
-        return response(Item::all());
+        return response(Item::with('category')->limit($request->perpage ?? 5)
+        ->offset(($request->perpage ?? 5) * ($request->page ?? 0))
+        ->get());
     }
 
+    public function total(){
+        return response(Item::all()->count());
+    }
     /**
      * Store a newly created resource in storage.
      */

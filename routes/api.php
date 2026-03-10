@@ -18,13 +18,15 @@ Route::post('/login', [AuthController::class,'login']);
 
 Route::group(['middleware' => ['auth:sanctum']], function(){
     Route::get('/order', [OrderControllerApi::class, 'index']);
+    Route::get('/order_total', [OrderControllerApi::class, 'total']);
 
     Route::get('/user', function (Request $request){
         return $request->user();
     });
     Route::get('/logout', [AuthController::class, 'logout']);
 });
-
+Route::get('/category_total', [CategoryControllerApi::class, 'total']);
+Route::get('/item_total', [ItemControllerApi::class, 'total']);
 Route::get('/category', [CategoryControllerApi::class, 'index']);
 Route::get('/category/{id}', [CategoryControllerApi::class, 'show']);
 Route::get('/item', [ItemControllerApi::class, 'index']);

@@ -10,9 +10,15 @@ class OrderControllerApi extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return response(Order::with('items')->get());
+        return response(Order::where('user_id', $request->user()->id)->limit($request->perpage ?? 5)
+        ->offset(($request->perpage ?? 5) * ($request->page ?? 0))->with('items')
+        ->get());
+    }
+
+    public function total(Request $request){
+        return response(Order::where('user_id', $request->user()->id)->count());
     }
 
     /**
