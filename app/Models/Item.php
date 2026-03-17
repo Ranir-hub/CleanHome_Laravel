@@ -14,7 +14,8 @@ class Item extends Model
         'name',
         'price',
         'category_id',
-        'balance'
+        'balance',
+        'picture_url'
     ];
     public function category(): BelongsTo{
         return $this->belongsTo(Category::class);

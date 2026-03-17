@@ -26,7 +26,6 @@ class OrderControllerApi extends Controller
      */
     public function store(Request $request)
     {
-        //
     }
 
     /**

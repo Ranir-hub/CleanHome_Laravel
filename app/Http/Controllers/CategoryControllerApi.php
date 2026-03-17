@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Storage;
+use Exception; 
 use Illuminate\Http\Request;
 use App\Models\Category;
 
@@ -18,7 +21,7 @@ class CategoryControllerApi extends Controller
     }
 
     public function total(){
-        return response(Category::all()->count());
+        return response(Category::count());
     }
 
     /**
@@ -26,7 +29,22 @@ class CategoryControllerApi extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if(!Gate::allows('create-category')){
+            return response()->json([
+                'code' => 1,
+                'message' => 'У вас нет прав на добавление категории'
+            ]);
+        }
+        $validated = $request->validate([
+            'name' => 'required|unique:categories|max:255',
+        ]);
+        
+        $category = new Category($validated);
+        $category->save();
+        return response()->json([
+            'code' => 0,
+            'message' => 'Категория успешно добавлена'
+        ]);
     }
 
     /**

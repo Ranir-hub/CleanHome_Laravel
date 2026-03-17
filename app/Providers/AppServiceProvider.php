@@ -7,6 +7,7 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Gate;
 use App\Models\User;
 use App\Models\Item;
+use App\Models\Category;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,11 +22,11 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      */
+    
     public function boot(): void
     {
-        Paginator::defaultView('pagination::default');
 
-        Gate::define('destroy-edit-item', function(User $user, Item $item){
+        Gate::define('create-category', function(User $user){
             return $user->is_admin;
         });
 
