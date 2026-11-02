@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->BigInteger('phone');
-            $table->boolean('is_organization');
+            $table->bigInteger('phone')->nullable();
+            $table->boolean('is_organization')->default(false);
         });
 
         Schema::create('categories', function (Blueprint $table) {
@@ -23,8 +23,7 @@ return new class extends Migration
 
         Schema::create('items', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('category_id');
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
             $table->string('name', 256);
             $table->integer('price');
             $table->integer('balance');
@@ -32,8 +31,7 @@ return new class extends Migration
 
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->dateTime('time_start');
             $table->dateTime('time_end');
             $table->integer('total_price');
@@ -41,10 +39,8 @@ return new class extends Migration
 
         Schema::create('item_orders', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('item_id');
-            $table->foreign('item_id')->references('id')->on('items');
-            $table->unsignedInteger('order_id');
-            $table->foreign('order_id')->references('id')->on('orders');
+            $table->foreignId('item_id')->constrained('items')->onDelete('cascade');
+            $table->foreignId('order_id')->constrained('orders')->onDelete('cascade');
             $table->integer('amount');
         });
     }
