@@ -29,8 +29,8 @@ jobs:
         run: |
           ssh -i ~/.ssh/id_ed25519 "$SSH_USER@$SSH_HOST" bash -s << 'EOF'
           set -euo pipefail
-          git -C /var/www/CleanHome_Laravel pull --ff-only origin main
-          cd ~/cleanhome-docker
+          git -C /var/www/CleanHome_Laravel pull --ff-only origin master
+          cd /home/ranir/cleanhome-docker
           docker-compose build backend-app
           docker-compose up -d backend-app
           docker exec backend-app php artisan migrate --force
