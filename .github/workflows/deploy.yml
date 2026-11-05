@@ -29,7 +29,7 @@ jobs:
         run: |
           ssh -i ~/.ssh/id_ed25519 "$SSH_USER@$SSH_HOST" bash -s << 'EOF'
           set -euo pipefail
-          git -C /var/www/CleanHome_Laravel pull --ff-only origin main
+          git -C /var/www/CleanHome_Laravel pull --ff-only origin master
           cd ~/cleanhome-docker
           docker-compose build backend-app
           docker-compose up -d backend-app
