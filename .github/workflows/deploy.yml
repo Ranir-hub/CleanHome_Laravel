@@ -32,6 +32,7 @@ jobs:
           git -C /var/www/CleanHome_Laravel pull --ff-only origin master
           cd /home/ranir/cleanhome-docker
           docker-compose build backend-app
+          docker rm -f backend-app || true
           docker-compose up -d backend-app
           docker exec backend-app php artisan migrate --force
           docker exec backend-app php artisan config:cache
