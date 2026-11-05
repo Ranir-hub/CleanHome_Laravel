@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->bigInteger('phone')->nullable();
+        Schema::table('users', function (Blueprint $table){
+  	    $table->bigInteger('phone')->nullable();
             $table->boolean('is_organization')->default(false);
         });
 
